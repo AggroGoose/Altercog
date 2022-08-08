@@ -1,0 +1,78 @@
+@use "../variables/allvars" as *;
+
+$smaller: $font-sm;
+$smallish: $font-m;
+$main-fontsize: $font-lg;
+$bigger: $font-xl;
+
+$text-color-1: black;
+$text-color-2: $blue-200;
+
+body {
+  font-family: $primary-font;
+  font-size: $main-fontsize;
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:not(.kg-btn):not(.kg-product-card-button):hover {
+  opacity: 0.8;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-family: $secondary-font;
+  font-weight: 600;
+}
+h1 {
+  font-size: $font-4xl;
+}
+h2 {
+  font-size: $font-3xl;
+}
+h3 {
+  font-size: $font-2xl;
+}
+
+figcaption {
+  color: $text-color-1;
+  font-size: $smaller;
+  line-height: 1.4;
+  text-align: center;
+}
+
+a {
+  color: $text-color-2;
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+.markdown {
+  > blockquote:not([class]),
+  > dl,
+  > ol,
+  > p,
+  > ul {
+    font-size: $main-fontsize;
+  }
+
+  & .kg-toggle-card .kg-toggle-content {
+    > ol,
+    > p,
+    > ul {
+      font-size: $smallish;
+    }
+  }
+
+  & .kg-callout-card .kg-callout-text {
+    font-size: $smallish;
+  }
+}

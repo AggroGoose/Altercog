@@ -1,0 +1,28 @@
+.main-grid {
+  display: grid;
+  width: 1200px;
+  margin: auto;
+  gap: 24px;
+  grid-template-columns:
+    [full-start] 1fr [wide-start] 1fr
+    [main-start] repeat(8, 1fr) [main-end] 1fr
+    [wide-end] 1fr[full-end];
+}
+
+.kg-width {
+  &-wide {
+    grid-column: wide-start/wide-end;
+  }
+
+  &-full {
+    grid-column: full-start/full-end;
+
+    figcaption {
+      padding: 0 1.6rem;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

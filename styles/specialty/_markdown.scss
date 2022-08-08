@@ -1,0 +1,51 @@
+@use "../mixins/allmixins" as mix;
+@use "../variables/allvars" as var;
+
+.markdown {
+  margin-top: 4rem;
+
+  > * {
+    grid-column: main-start/main-end;
+  }
+
+  > * + * {
+    margin: 0;
+  }
+
+  > [id] {
+    margin: 0;
+
+    & .kg-card {
+      margin-top: 24px !important;
+
+      & + * {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  > blockquote,
+  > hr {
+    margin-top: 40px;
+    position: relative;
+  }
+
+  > blockquote + *,
+  > hr + * {
+    margin-top: 40px;
+  }
+
+  dl,
+  ol,
+  ul {
+    padding-left: 48px;
+
+    li {
+      padding-left: 8px;
+    }
+  }
+
+  li + li {
+    margin-top: 8px;
+  }
+}

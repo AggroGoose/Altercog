@@ -1,0 +1,59 @@
+@use "../mixins/allmixins" as mix;
+@use "../variables/allvars" as var;
+
+.post {
+  &__title {
+    font-size: var.$font-6xl;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.25;
+    text-align: center;
+
+    @include mix.breakpoint("md") {
+      font-size: var.$font-7xl;
+      line-height: 1;
+      text-align: left;
+    }
+  }
+
+  &__avatar {
+    display: none;
+
+    @include mix.breakpoint("md") {
+      display: block;
+    }
+  }
+
+  &__cover {
+    grid-column: wide-start/wide-end;
+    position: relative;
+  }
+
+  &__author {
+    margin: auto;
+
+    &--avatar {
+      display: block;
+
+      @include mix.breakpoint("md") {
+        display: none;
+      }
+    }
+
+    &--date {
+      font-size: var.$font-lg;
+      margin-bottom: 24px;
+    }
+  }
+
+  &__body {
+    margin: auto;
+    max-width: 672px;
+  }
+
+  &__header {
+    > * {
+      grid-column: wide-start/wide-end;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@use "../variables/colors" as *;
+@use "../variables/spacing" as *;
+
+.separator {
+  border-color: $color-accent;
+  margin-top: $space-2800;
+  margin-bottom: $space-2400;
+}

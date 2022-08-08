@@ -1,0 +1,62 @@
+@use "../variables/allvars" as *;
+
+ol[role="list"],
+ul[role="list"] {
+  list-style: none;
+}
+
+img,
+picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+pre {
+  -webkit-overflow-scrolling: touch;
+  background-color: $blue-700;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  line-height: 1.5;
+  overflow-x: scroll;
+  padding: 16px 24px;
+  white-space: pre;
+}
+
+:not(pre) > code {
+  background-color: $blue-700;
+  color: black;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+iframe {
+  border: 0;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+
+hr {
+  background-color: $blue-100;
+  border: 0;
+  height: 1px;
+  width: 100%;
+}
+
+blockquote:not([class]) {
+  border-left: 4px solid $primary-red;
+  padding-left: 2rem;
+}
+
+figcaption {
+  margin-top: 16px;
+}
