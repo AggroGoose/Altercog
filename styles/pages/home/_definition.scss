@@ -1,0 +1,49 @@
+@use "../../variables/allvars" as *;
+
+.definition {
+  font-family: $secondary-font;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    font-weight: 700;
+  }
+
+  &__head {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+
+    &--def {
+      margin-top: auto;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 2rem;
+    }
+
+    &--title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: normal;
+    }
+  }
+
+  &__sub {
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  &__body {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    margin: 32px 0;
+  }
+
+  &__final {
+    font-size: 1.25rem;
+    font-style: italic;
+  }
+}

@@ -1,26 +1,26 @@
 @mixin breakpoint($type) {
-  @if $type == sm {
+  @if $type == "sm" {
     @media (min-width: 576px) {
       @content;
     }
   }
-  @if $type == md {
+  @if $type == "md" {
     @media (min-width: 768px) {
       @content;
     }
   }
-  @if $type == lg {
+  @if $type == "lg" {
     @media (min-width: 1024px) {
       @content;
     }
   }
-  @if $type == xl {
-    @media (min-width: 1280px) {
+  @if $type == "xl" {
+    @media (min-width: 1200px) {
       @content;
     }
   }
-  @if $type == 2xl {
-    @media (min-width: 1536px) {
+  @if $type == "2xl" {
+    @media (min-width: 1440px) {
       @content;
     }
   }

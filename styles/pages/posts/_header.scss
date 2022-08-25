@@ -1,0 +1,51 @@
+@use "../../variables/allvars" as *;
+
+.post__head {
+  background: linear-gradient(
+    100.64deg,
+    #000410 -5.43%,
+    #000b28 42.82%,
+    #000410 100.22%
+  );
+
+  > .main-grid {
+    width: 100%;
+    padding-top: 32px;
+    padding-bottom: 48px;
+  }
+
+  &--body {
+    grid-column: 2/10;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &--feature {
+    grid-column: 10/14;
+  }
+
+  &--meta {
+    color: $red-700;
+    font-weight: 600;
+  }
+
+  &--title h1 {
+    background: linear-gradient(94.64deg, #c20027 0.91%, #698df0 81.68%);
+    background-clip: text;
+    color: transparent;
+    font-size: 4rem;
+    font-weight: 700;
+  }
+
+  &--excerpt {
+    color: white;
+
+    &__title {
+      color: $blue-900;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.75rem;
+    }
+  }
+}

@@ -1,11 +1,10 @@
 .main-grid {
   display: grid;
-  width: 1200px;
   margin: auto;
   gap: 24px;
   grid-template-columns:
-    [full-start] 1fr [wide-start] 1fr
-    [main-start] repeat(8, 1fr) [main-end] 1fr
+    [full-start] 1fr [wide-start] repeat(2, 78px)
+    [main-start] repeat(8, 78px) [main-end] repeat(2, 78px)
     [wide-end] 1fr[full-end];
 }
 

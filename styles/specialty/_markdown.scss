@@ -2,7 +2,9 @@
 @use "../variables/allvars" as var;
 
 .markdown {
-  margin-top: 4rem;
+  &.main-grid {
+    margin-top: 32px;
+  }
 
   > * {
     grid-column: main-start/main-end;

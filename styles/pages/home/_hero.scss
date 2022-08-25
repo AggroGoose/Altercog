@@ -1,0 +1,44 @@
+.home {
+  &__hero {
+    background: linear-gradient(
+      100.64deg,
+      #000410 -5.43%,
+      #000b28 42.82%,
+      #000410 100.22%
+    );
+
+    &--main {
+      width: 100%;
+      padding: 0;
+      margin-top: 32px;
+    }
+
+    &--def {
+      color: white;
+      grid-column: 3/8;
+      align-self: center;
+    }
+
+    &--img {
+      grid-column: 9/13;
+      line-height: 0;
+    }
+  }
+
+  &__divide {
+    background-color: #000410;
+    width: 100%;
+
+    > * {
+      margin: auto;
+      mask-image: linear-gradient(to bottom, black 55%, transparent 85%);
+      mask-image: linear-gradient(
+        to right,
+        transparent 5%,
+        black 20%,
+        black 80%,
+        transparent 95%
+      );
+    }
+  }
+}

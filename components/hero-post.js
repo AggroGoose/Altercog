@@ -1,5 +1,5 @@
 import Avatar from "./avatar";
-import Date from "./date";
+import Date from "./helpers/date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 

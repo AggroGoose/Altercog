@@ -1,0 +1,74 @@
+@use "../../variables/allvars" as *;
+
+.home {
+  &__latest {
+    background-color: #000410;
+    color: white;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h2 {
+      grid-column: wide-start/wide-end;
+      font-size: 2.25rem;
+
+      + * {
+        grid-column: 3/13;
+      }
+    }
+
+    &__card {
+      display: grid;
+      grid-template-columns: 384px 1fr;
+      gap: 24px;
+      background-color: #00081f;
+      border-radius: 10px;
+      margin-bottom: 16px;
+
+      &--cover {
+        height: 384px;
+        width: 100%;
+      }
+
+      &--image {
+        width: 100%;
+        object-fit: fill;
+        object-position: center;
+        aspect-ratio: 1;
+        border-radius: 10px 0 0 10px;
+      }
+
+      &--post {
+        height: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &--tag {
+        font-weight: 500;
+        margin-bottom: 16px;
+        color: $red-700;
+      }
+
+      &--title {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(94.64deg, #c20027 0.91%, #698df0 81.68%);
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 24px;
+      }
+
+      &--meta {
+        margin-top: auto;
+        display: flex;
+        gap: 16px;
+        color: $red-700;
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,11 +1,12 @@
 import Head from "next/head";
-import MoreStories from "../components/more-stories";
-import HeroPost from "../components/hero-post";
-import Intro from "../components/intro";
+import Image from "next/image";
 import { getAllPostsForHome } from "../lib/ghost";
+import Header from "../components/nav/Header";
+import HeroSection from "../components/homePage/HeroSection";
+import LatestPost from "../components/homePage/LatestPost";
 
 export default function Home({ allPosts }) {
-  const heroPost = allPosts[0];
+  const latestPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
   return (
@@ -14,19 +15,19 @@ export default function Home({ allPosts }) {
         <title>Blog Test with Next.js</title>
       </Head>
 
-      <main className="container-box">
-        <Intro />
-        {heroPost && (
-          <HeroPost
-            title={heroPost.title}
-            coverImage={heroPost.feature_image}
-            date={heroPost.published_at}
-            author={heroPost.primary_author}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
+      <main className="home">
+        <HeroSection>
+          <Header />
+        </HeroSection>
+        <div className="home__divide">
+          <Image
+            src="/images/TheWorldIsOurs.png"
+            height={423}
+            width={2161}
+            priority="true"
           />
-        )}
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        </div>
+        <LatestPost post={latestPost} />
       </main>
     </>
   );
@@ -34,6 +35,7 @@ export default function Home({ allPosts }) {
 
 export async function getStaticProps({ preview }) {
   const allPosts = (await getAllPostsForHome(preview)) || [];
+
   return {
     props: { allPosts },
   };

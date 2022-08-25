@@ -1,5 +1,5 @@
-@use "../mixins/allmixins" as mix;
-@use "../variables/allvars" as var;
+@use "../../mixins/allmixins" as mix;
+@use "../../variables/allvars" as var;
 
 .post {
   &__title {
@@ -53,7 +53,7 @@
 
   &__header {
     > * {
-      grid-column: wide-start/wide-end;
+      grid-column: wide-start / wide-end;
     }
   }
 }

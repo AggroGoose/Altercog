@@ -11,23 +11,24 @@ $text-color-2: $blue-200;
 body {
   font-family: $primary-font;
   font-size: $main-fontsize;
-  font-weight: 300;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
 }
 
 a {
   text-decoration: none;
 }
 
-a:not(.kg-btn):not(.kg-product-card-button):hover {
+a:not([class]):hover {
   opacity: 0.8;
 }
 
 h1,
 h2,
-h3 {
-  letter-spacing: -0.02em;
+h3,
+h4 {
+  letter-spacing: 0.02em;
   line-height: 1.15;
   font-family: $secondary-font;
   font-weight: 600;
