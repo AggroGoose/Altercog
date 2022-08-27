@@ -5,15 +5,16 @@ $smallish: $font-m;
 $main-fontsize: $font-lg;
 $bigger: $font-xl;
 
-$text-color-1: black;
-$text-color-2: $blue-200;
+$text-color-1: white;
+$text-color-2: $blue-900;
 
 body {
   font-family: $primary-font;
   font-size: $main-fontsize;
   font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+  color: $text-color-1;
 }
 
 a {
@@ -46,7 +47,6 @@ h3 {
 figcaption {
   color: $text-color-1;
   font-size: $smaller;
-  line-height: 1.4;
   text-align: center;
 }
 

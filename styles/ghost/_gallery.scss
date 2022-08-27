@@ -41,4 +41,9 @@ $picgap: 12px;
 
 .kg-image-card {
   margin: 0 auto;
+  grid-column: min-start/min-end !important;
+
+  &.kg-image-wide {
+    grid-column: wide-start/wide-end !important;
+  }
 }

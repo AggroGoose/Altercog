@@ -1,4 +1,4 @@
-import { createElement, useState } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import childBuilder from "../../../lib/childBuilder";
 import parseImageCard from "./helpers/parseImageCard";
@@ -17,6 +17,8 @@ const ImageCard = ({ elem }) => {
     numHeight,
   } = parseImageCard(elem);
 
+  const wideImg = numWidth > numHeight;
+
   return (
     <>
       {viewModal && (
@@ -31,7 +33,9 @@ const ImageCard = ({ elem }) => {
           />
         </ModalPortal>
       )}
-      <figure className="kg-card kg-image-card">
+      <figure
+        className={`kg-card kg-image-card${wideImg ? " kg-image-wide" : ""}`}
+      >
         <div
           className="kg-image"
           onClick={() => {

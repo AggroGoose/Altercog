@@ -4,7 +4,10 @@
   gap: 24px;
   grid-template-columns:
     [full-start] 1fr [wide-start] repeat(2, 78px)
-    [main-start] repeat(8, 78px) [main-end] repeat(2, 78px)
+    [main-start] 78px [min-start] repeat(
+      6,
+      78px
+    ) [min-end] 78px [main-end] repeat(2, 78px)
     [wide-end] 1fr[full-end];
 }
 

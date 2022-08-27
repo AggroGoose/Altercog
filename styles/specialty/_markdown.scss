@@ -2,8 +2,10 @@
 @use "../variables/allvars" as var;
 
 .markdown {
+  background-color: #010511;
+
   &.main-grid {
-    margin-top: 32px;
+    margin-top: 32px#010511;
   }
 
   > * {
@@ -15,8 +17,6 @@
   }
 
   > [id] {
-    margin: 0;
-
     & .kg-card {
       margin-top: 24px !important;
 
