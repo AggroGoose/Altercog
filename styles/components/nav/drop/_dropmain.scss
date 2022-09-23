@@ -1,0 +1,48 @@
+@use "../../../variables/allvars" as *;
+
+@forward "./midmenu";
+@forward "./rightmenu";
+
+@mixin dropSettings {
+  background-color: $blue-200;
+  opacity: 95%;
+  border-radius: 8px;
+  border: 1px solid $blue-300;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+  z-index: 55;
+
+  &--underlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background-color: $blue-800;
+    z-index: 50;
+    opacity: 0;
+  }
+}
+
+.dropdown {
+  &__middle {
+    width: 320px;
+    position: fixed;
+    top: var(--header-height);
+    left: 50%;
+    transform: translateX(-160px);
+
+    @include dropSettings;
+  }
+
+  &__right {
+    width: 320px;
+    position: fixed;
+    top: var(--header-height);
+    right: 24px;
+
+    @include dropSettings;
+  }
+}

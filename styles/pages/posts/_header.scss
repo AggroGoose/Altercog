@@ -1,51 +1,147 @@
-@use "../../variables/allvars" as *;
-
 .post__head {
-  background: linear-gradient(
-    180deg,
-    #010511 0%,
-    #010b28 43.23%,
-    #010511 76.04%
-  );
+  display: grid;
+  grid-template-columns: 1fr 1080px 1fr;
+  margin: auto;
+  position: relative;
+  background-color: var(--primary-white);
+  padding: 32px 0;
 
-  > .main-grid {
-    width: 100%;
-    padding-top: 32px;
-    padding-bottom: 48px;
+  > * {
+    grid-column: 2/3;
   }
 
   &--body {
-    grid-column: 2/10;
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+  }
+
+  &--bread {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    font-size: var(--font-small);
+    line-height: normal;
+
+    a,
+    a:visited {
+      color: var(--primary-color);
+      font-weight: var(--font-bweight);
+    }
+  }
+
+  &--content {
+    grid-column: 2/3;
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
+    justify-content: space-between;
+    background-image: url("/Altercog Logo.svg");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 360px;
+
+    > SVG {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 360px;
+      fill: var(--primary-200);
+      opacity: 0.1;
+    }
   }
 
   &--feature {
-    grid-column: 10/14;
+    grid-column: 1/2;
+
+    img {
+      border-radius: 15px;
+    }
+  }
+
+  &--tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &--button {
+      color: var(--primary-color);
+      background: none;
+      border: 3px solid var(--primary-color);
+      border-radius: 40px;
+      padding: 8px 0;
+      width: 140px;
+      font-size: 1rem;
+      font-weight: var(--font-bweight);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: var(--primary-white);
+      }
+    }
   }
 
   &--meta {
-    color: $red-700;
+    width: 100%;
+    color: var(--font-color);
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--author {
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 400;
+
+    a {
+      font-style: normal;
+      font-weight: 700;
+
+      + a {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &--date {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  &--share {
+    font-size: 1.2rem;
+    font-weight: var(--font-bweight);
+
+    &--icons {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+
+      a {
+        color: var(--primary-color);
+
+        &:hover {
+          color: var(--accent-color);
+        }
+      }
+
+      svg {
+        fill: currentColor;
+        height: 32px;
+        width: 32px;
+      }
+    }
   }
 
   &--title h1 {
-    background: linear-gradient(94.64deg, #c20027 0.91%, #698df0 81.68%);
-    background-clip: text;
-    color: transparent;
-    font-size: 4rem;
+    font-size: 3.6rem;
     font-weight: 700;
-  }
-
-  &--excerpt {
-    color: white;
-
-    &__title {
-      color: $blue-900;
-      font-weight: 700;
-      font-style: italic;
-      font-size: 1.75rem;
-    }
+    margin-bottom: 32px;
+    line-height: 1.2;
+    color: var(--primary-color);
   }
 }

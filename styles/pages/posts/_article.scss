@@ -1,0 +1,76 @@
+.article {
+  margin: 0;
+  background-color: var(--primary-white);
+
+  &__content {
+    width: 1200px;
+    padding: 32px 10px;
+    margin: 0 auto;
+    background-color: var(--primary-white);
+
+    display: grid;
+    grid-template-columns:
+      [full-start] 1fr [wide-start] 90px [main-start] 90px [min-start] repeat(
+        6,
+        90px
+      )
+      [min-end] 90px [main-end] 90px [wide-end] 1fr[full-end];
+
+    > * {
+      grid-column: main-start/main-end;
+    }
+
+    gap: 24px 0;
+
+    &__engagement {
+      grid-column: wide-end/full-end;
+      grid-row: 1/2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 100px;
+
+      button {
+        background: none;
+        border: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: var(--primary-color);
+        font-weight: var(--font-bweight);
+
+        &:hover {
+          color: var(--accent-color);
+
+          svg {
+            fill: var(--accent-color);
+          }
+        }
+
+        SVG {
+          width: 44px;
+          height: 44px;
+          fill: var(--primary-color);
+          line-height: normal;
+        }
+      }
+    }
+  }
+
+  &__summary {
+    font-size: var(--font-large);
+    font-style: italic;
+    grid-row: 1/2;
+  }
+
+  &__heading {
+    color: var(--primary-color);
+    font-weight: var(--font-bweight);
+    font-size: 2.8rem;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}

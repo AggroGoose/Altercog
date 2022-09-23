@@ -14,6 +14,7 @@ export default function MoreStories({ posts }) {
             author={post.primary_author}
             slug={post.slug}
             excerpt={post.excerpt}
+            tag={post.primary_tag.slug}
           />
         ))}
       </div>

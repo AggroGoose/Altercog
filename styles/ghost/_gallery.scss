@@ -22,7 +22,7 @@ $picgap: 12px;
   justify-content: center;
 
   &:not(:first-of-type) {
-    margin: $picgap 0 0;
+    margin: $picgap 0 0 0;
   }
 }
 
@@ -44,6 +44,6 @@ $picgap: 12px;
   grid-column: min-start/min-end !important;
 
   &.kg-image-wide {
-    grid-column: wide-start/wide-end !important;
+    grid-column: main-start/main-end !important;
   }
 }

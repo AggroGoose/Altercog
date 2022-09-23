@@ -1,4 +1,3 @@
-import Avatar from "./avatar";
 import Date from "./helpers/date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
@@ -8,7 +7,7 @@ export default function PostPreview({
   coverImage,
   date,
   excerpt,
-  author,
+  tag,
   slug,
 }) {
   return (
@@ -23,7 +22,7 @@ export default function PostPreview({
         />
       </div>
       <h3>
-        <Link href={`/posts/${slug}`}>
+        <Link href={`/articles/${tag}/${slug}`}>
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
@@ -31,7 +30,6 @@ export default function PostPreview({
         <Date dateString={date} />
       </div>
       <p className="mstories__preview--excerpt">{excerpt}</p>
-      <Avatar name={author.name} picture={author.profile_image} />
     </div>
   );
 }

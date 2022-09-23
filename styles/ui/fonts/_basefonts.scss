@@ -1,0 +1,74 @@
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-regular);
+  font-weight: var(--font-weight);
+  line-height: var(--font-height);
+  letter-spacing: var(--font-space);
+  color: var(--font-color);
+}
+
+a {
+  text-decoration: none;
+  word-break: break-word;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--font-space);
+  line-height: 1.4;
+  font-family: var(--font-secondary);
+  font-weight: var(--font-bweight);
+}
+
+h2 {
+  font-size: 1.875rem;
+}
+h3 {
+  font-size: 1.625rem;
+}
+
+figcaption {
+  color: var(--font-color);
+  font-size: var(--font-small);
+  font-style: italic;
+  text-align: center;
+}
+
+.header {
+  button p {
+    color: var(--font-color);
+    font-size: 1rem;
+    font-weight: var(--font-bweight);
+    letter-spacing: var(--font-spacing);
+  }
+}
+
+.markdown {
+  > dl,
+  > ol,
+  > p,
+  > ul {
+    font-size: var(--font-regular);
+  }
+
+  > .article__summary,
+  > blockquote:not([class]) {
+    font-size: var(--font-large);
+    font-family: var(--font-secondary);
+    font-style: italic;
+  }
+
+  & .kg-toggle-card .kg-toggle-content {
+    > ol,
+    > p,
+    > ul {
+      font-size: var(--font-small);
+    }
+  }
+
+  & .kg-callout-card .kg-callout-text {
+    font-size: var(--font-small);
+  }
+}

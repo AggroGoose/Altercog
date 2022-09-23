@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import { getAllPostsForHome } from "../lib/ghost";
-import Header from "../components/nav/Header";
 import HeroSection from "../components/homePage/HeroSection";
 import LatestPost from "../components/homePage/LatestPost";
 
@@ -16,15 +15,15 @@ export default function Home({ allPosts }) {
       </Head>
 
       <main className="home">
-        <HeroSection>
-          <Header />
-        </HeroSection>
+        <HeroSection />
+
         <div className="home__divide">
           <Image
             src="/images/TheWorldIsOurs.png"
             height={423}
             width={2161}
             priority="true"
+            alt="The World Is Ours"
           />
         </div>
         <LatestPost post={latestPost} />

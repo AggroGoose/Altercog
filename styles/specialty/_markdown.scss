@@ -2,10 +2,8 @@
 @use "../variables/allvars" as var;
 
 .markdown {
-  background-color: #010511;
-
   &.main-grid {
-    margin-top: 32px#010511;
+    margin-top: 32px;
   }
 
   > * {

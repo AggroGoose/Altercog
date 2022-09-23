@@ -6,7 +6,7 @@ export default function LatestPost({ post }) {
   return (
     <div className="home__latest main-grid">
       <h2>Latest Post:</h2>
-      <Link href={`/posts/${post.slug}`}>
+      <Link href={`/articles/${post.primary_tag.slug}/${post.slug}`}>
         <a aria-label={post.title} className="home__latest--link">
           <div className="home__latest__card">
             <div className="home__latest__card--cover">
@@ -15,6 +15,9 @@ export default function LatestPost({ post }) {
                 className="home__latest__card--image"
                 width={340}
                 height={510}
+                alt={
+                  post.feature_image_alt || `Feature image for ${post.title}`
+                }
               />
             </div>
             <div className="home__latest__card--post">

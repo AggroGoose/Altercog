@@ -10,7 +10,6 @@ export default function GalleryImageCard({
   const { imgSrc, imgWidth, imgHeight } = parseImageCard(elem);
 
   function handleModal() {
-    console.log(elem.attributes);
     imgNumber.current = imgID;
     setViewModal(true);
   }

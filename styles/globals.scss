@@ -1,12 +1,19 @@
+@use "./variables/rootvariables";
+
 @use "./specialty/initiate";
-@use "./specialty/fonts";
+
+@use "./ui/color";
+@use "./ui/fonts/fontprovider";
 @use "./specialty/accessibility";
 @use "./specialty/markdown";
 @use "./specialty/elements";
 
 @use "./components/modal";
 @use "./components/morestories";
-@use "./components/header";
+@use "./components/nav/header";
+@use "./components/nav/footer";
+@use "./components/nav/menu";
+@use "./components/auth/authprovider";
 
 @use "./ui/container";
 @use "./ui/layout";

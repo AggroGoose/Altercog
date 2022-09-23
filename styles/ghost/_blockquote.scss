@@ -1,3 +1,5 @@
+@use "../variables/allvars" as *;
+
 .kg-blockquote-alt {
   font-size: 1.5em;
   font-style: italic;
@@ -15,5 +17,31 @@
     font-size: 1.2em;
     padding-left: 1.75em;
     padding-right: 1.75em;
+  }
+}
+
+.post__quote {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &--start {
+    background-color: $primary-blue;
+    height: 25px;
+    width: 80px;
+    align-self: flex-start;
+  }
+
+  &--content {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  &--end {
+    background-color: $primary-blue;
+    height: 25px;
+    width: 80px;
+    align-self: flex-end;
   }
 }

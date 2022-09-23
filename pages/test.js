@@ -1,4 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 const Test = () => {
   const { data: session, status } = useSession();
@@ -11,6 +12,7 @@ const Test = () => {
       {session ? (
         <>
           <h1>You are signed in</h1>
+          <Image src={session.user.image} width={50} height={50} />
           <button onClick={signOut}>Sign Out</button>
         </>
       ) : (

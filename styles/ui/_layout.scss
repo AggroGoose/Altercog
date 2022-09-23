@@ -1,30 +1,8 @@
 .main-grid {
   display: grid;
   margin: auto;
-  gap: 24px;
+  gap: 32px 0;
   grid-template-columns:
-    [full-start] 1fr [wide-start] repeat(2, 78px)
-    [main-start] 78px [min-start] repeat(
-      6,
-      78px
-    ) [min-end] 78px [main-end] repeat(2, 78px)
-    [wide-end] 1fr[full-end];
-}
-
-.kg-width {
-  &-wide {
-    grid-column: wide-start/wide-end;
-  }
-
-  &-full {
-    grid-column: full-start/full-end;
-
-    figcaption {
-      padding: 0 1.6rem;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
+    [full-start] 1fr [main-start] 90px [min-start] repeat(6, 90px)
+    [min-end] 90px [main-end] 1fr[full-end];
 }

@@ -1,23 +1,112 @@
 import Image from "next/future/image";
+import Link from "next/link";
 import Date from "../helpers/date";
 
-const PostHeader = ({ post, children }) => {
+import {
+  BsFacebook,
+  BsTwitter,
+  BsLinkedin,
+  BsReddit,
+  BsPinterest,
+} from "react-icons/bs";
+import { ImTumblr2 } from "react-icons/im";
+import AltercogLogo from "../../lib/SVG/AltercogLogo";
+
+const PostHeader = ({ post }) => {
   return (
     <div className="post__head">
-      {children}
-      <div className="main-grid">
-        <div className="post__head--body">
-          <div className="post__head--meta">
-            <Date dateString={post.published_at} />
-          </div>
-          <div className="post__head--title">
-            <h1>{post.title}</h1>
-          </div>
-          <h2 className="post__head--excerpt__title">{`TL;DR`}</h2>
-          <div className="post__head--excerpt">{post.excerpt}</div>
-        </div>
+      <div className="post__head--bread">
+        <Link href="/articles">Articles</Link>/
+        <Link href={`/articles/${post.primary_tag.slug}`}>
+          {post.primary_tag.name}
+        </Link>
+      </div>
+      <div className="post__head--title">
+        <h1>{post.title}</h1>
+      </div>
+      <div className="post__head--body">
         <div className="post__head--feature">
-          <Image src={post.feature_image} height={384} width={480} />
+          <Image
+            src={post.feature_image}
+            height={1080}
+            width={1080}
+            alt={
+              post.feature_image_alt ||
+              `Feature image for article "${post.title}".`
+            }
+          />
+        </div>
+        <div className="post__head--content">
+          <div className="post__head--meta">
+            <div className="post__head--author">
+              By:{" "}
+              <Link href={`/authors/${post.primary_author.slug}`}>
+                <a>{post.primary_author.name}</a>
+              </Link>
+              {` // `}
+              <a href={`https://twitter.com/${post.primary_author.twitter}`}>
+                {post.primary_author.twitter}
+              </a>
+            </div>
+            <div className="post__head--date">
+              <Date dateString={post.published_at} />
+            </div>
+          </div>
+          <div className="post__head--tags">
+            {post.tags.map((tag) => (
+              <Link href={`/articles/${tag.slug}`} key={tag.id}>
+                <button className="post__head--tags--button">{tag.name}</button>
+              </Link>
+            ))}
+          </div>
+
+          <div className="post__head--share">
+            <p>Share this article:</p>
+            <div className="post__head--share--icons">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=https://www.altercog.com/articles/${post.primary_tag.slug}/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BsFacebook />
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=https://www.altercog.com/articles/${post.primary_tag.slug}/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BsTwitter />
+              </a>
+              <a
+                href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.altercog.com/articles/${post.primary_tag.slug}/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BsLinkedin />
+              </a>
+              <a
+                href={`https://www.reddit.com/submit?url=https://www.altercog.com/articles/${post.primary_tag.slug}/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BsReddit />
+              </a>
+              <a
+                href={`https://www.pinterest.com/pin/create/button/?url=https://www.altercog.com/articles/${post.primary_tag.slug}/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BsPinterest />
+              </a>
+              <a
+                href={`https://www.tumblr.com/widgets/share/tool?canonicalUrl=https://www.altercog.com/articles/${post.primary_tag.slug}/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ImTumblr2 />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
