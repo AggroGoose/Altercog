@@ -10,7 +10,6 @@ import {
   BsPinterest,
 } from "react-icons/bs";
 import { ImTumblr2 } from "react-icons/im";
-import AltercogLogo from "../../lib/SVG/AltercogLogo";
 
 const PostHeader = ({ post }) => {
   return (
@@ -48,8 +47,10 @@ const PostHeader = ({ post }) => {
                 {post.primary_author.twitter}
               </a>
             </div>
-            <div className="post__head--date">
+            <div className="post__head--secondary">
               <Date dateString={post.published_at} />
+              {` - `}
+              <span className="post__head--secondary--readtime">{`${post.reading_time} Minute Read`}</span>
             </div>
           </div>
           <div className="post__head--tags">

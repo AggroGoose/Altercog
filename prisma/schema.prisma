@@ -52,29 +52,23 @@ model CommentLikes {
   userId String
 }
 
-model Hashtag {
-  id String @id @default(cuid())
-  name String
-  posts PostHashtags[]
-}
-
 model Post {
   id String @id
   author User @relation(fields: [authorId], references: [authorId], onDelete: Cascade)
   authorId String
   audioLink String?
-  hashtag PostHashtags[]
   likes Int @default(0)
   likedBy PostLikes[]
+  favoritedBy PostFavorites[]
   comments Comment[]
 }
 
-model PostHashtags {
+model PostFavorites {
   id String @id @default(cuid())
   post Post @relation(fields: [postId], references: [id])
   postId String
-  hashtag Hashtag @relation(fields: [hashtagId], references: [id], onDelete: Cascade)
-  hashtagId String
+  user User @relation(fields: [userId], references: [id])
+  userId String
 }
 
 model PostLikes {
@@ -120,6 +114,7 @@ model User {
   email String? @unique
   emailVerified DateTime?
   image String?
+  intakeCompleted Boolean @default(false)
   subscribed Boolean @default(false)
   status String @default("free")
   isAdmin Boolean @default(false)
@@ -137,6 +132,7 @@ model User {
   commentLikes CommentLikes[]
   postlikes PostLikes[]
   replyLikes ReplyLikes[]
+  postFavorites PostFavorites[]
 
   @@map(name: "users")
 }

@@ -2,14 +2,17 @@ import Date from "./helpers/date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 
-export default function PostPreview({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  tag,
-  slug,
-}) {
+export default function PostPreview({ post }) {
+  const {
+    title,
+    feature_image: coverImage,
+    published_at: date,
+    reading_time: duration,
+    excerpt,
+    slug,
+    primary_tag: tag,
+  } = post;
+
   return (
     <div className="mstories__preview">
       <div className="mstories__preview--img">
@@ -17,19 +20,26 @@ export default function PostPreview({
           slug={slug}
           title={title}
           url={coverImage}
-          width={2000}
-          height={1216}
+          width={1080}
+          height={1080}
         />
+        <button className="mstories__preview--img--badge">
+          <Link href={`/articles/${tag.slug}`}>
+            <a>{tag.name}</a>
+          </Link>
+        </button>
       </div>
       <h3>
         <Link href={`/articles/${tag}/${slug}`}>
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
-      <div className="mstories__preview--date">
-        <Date dateString={date} />
-      </div>
+
       <p className="mstories__preview--excerpt">{excerpt}</p>
+      <div className="mstories__preview--meta">
+        <Date dateString={date} />{" "}
+        <span className="mstories__preview--duration">{`${duration} min read`}</span>
+      </div>
     </div>
   );
 }

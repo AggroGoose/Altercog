@@ -24,12 +24,12 @@
 
     &__engagement {
       grid-column: wide-end/full-end;
-      grid-row: 1/2;
+      grid-row: 1 / 4;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 24px;
       position: sticky;
-      top: 100px;
+      top: 90px;
 
       button {
         background: none;
@@ -38,9 +38,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 4px;
         cursor: pointer;
         color: var(--primary-color);
         font-weight: var(--font-bweight);
+        font-size: 1.1rem;
+        line-height: normal;
 
         &:hover {
           color: var(--accent-color);
@@ -51,8 +54,8 @@
         }
 
         SVG {
-          width: 44px;
-          height: 44px;
+          width: 36px;
+          height: 36px;
           fill: var(--primary-color);
           line-height: normal;
         }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
-export default function ArticleLike({ postId }) {
+export default function ArticleLike({ articleId }) {
   const { data: session } = useSession();
   const [liked, setLiked] = useState(false);
 
