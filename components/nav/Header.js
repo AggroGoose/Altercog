@@ -5,10 +5,13 @@ import NavRight from "./NavRight";
 import { useState } from "react";
 import NavMenu from "./menu/NavMenu";
 import ModalPortal from "../modalPortal";
+import InfoBanner from "./InfoBanner";
+import { useBanner } from "../../lib/context/BannerContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuType, setMenuType] = useState("");
+  const infoBanner = useBanner();
 
   const resetMenu = () => {
     setIsMenuOpen(false);
@@ -22,6 +25,7 @@ export default function Header() {
       menuType={menuType}
       setMenuType={setMenuType}
       resetMenu={resetMenu}
+      infoBanner={infoBanner}
     />
   );
 }
@@ -32,6 +36,7 @@ const MenuCheck = ({
   menuType,
   setMenuType,
   resetMenu,
+  infoBanner,
 }) => {
   if (isMenuOpen) {
     return (
@@ -42,6 +47,7 @@ const MenuCheck = ({
           menuType={menuType}
           setMenuType={setMenuType}
           resetMenu={resetMenu}
+          infoBanner={infoBanner}
         />
       </ModalPortal>
     );
@@ -53,6 +59,7 @@ const MenuCheck = ({
         menuType={menuType}
         setMenuType={setMenuType}
         resetMenu={resetMenu}
+        infoBanner={infoBanner}
       />
     );
   }
@@ -64,6 +71,7 @@ const NavHead = ({
   menuType,
   setMenuType,
   resetMenu,
+  infoBanner,
 }) => {
   return (
     <nav className={`header${isMenuOpen ? " isModal" : ""}`}>
@@ -89,6 +97,7 @@ const NavHead = ({
         />
         {isMenuOpen && <NavMenu menuType={menuType} resetMenu={resetMenu} />}
       </div>
+      {infoBanner && <InfoBanner infoBanner={infoBanner} />}
     </nav>
   );
 };
