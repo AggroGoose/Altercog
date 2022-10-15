@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import contentEval from "../../../lib/contentEval";
 import { TikTokEmbed } from "react-social-media-embed";
 
 export default function TikTokCard({ elem }) {
@@ -13,7 +12,7 @@ export default function TikTokCard({ elem }) {
   const src = base.attributes.cite;
 
   return (
-    <figure class="kg-card kg-embed-card">
+    <figure className="kg-card kg-embed-card">
       <TikTokEmbed url={src} />
     </figure>
   );
