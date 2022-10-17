@@ -4,6 +4,9 @@ export interface ParseElement {
   id?: string | number;
   content?: string;
   children?: ParseElement[];
+  additional?: {
+    tweet?: TweetParsed;
+  };
 }
 
 export interface ElemAttribs {
@@ -49,20 +52,32 @@ export interface Tweet {
   in_reply_to_user_id?: string;
 }
 
-export interface TweetAPI extends Tweet {
+export interface TweetData extends Tweet {
   author_id: string;
+  referenced_tweets?: {
+    type: string;
+    id: string;
+  }[];
   attachments?: {
     media_keys: string[];
   };
+}
+
+export interface MultiTweetResponse {
+  data: TweetData[];
   includes: {
     users: TweetUser[];
     tweets?: TweetAPI[];
     media?: TweetMedia[];
   };
-  referenced_tweets?: {
-    type: string;
-    id: string;
-  }[];
+}
+
+export interface TweetAPI extends TweetData {
+  includes: {
+    users: TweetUser[];
+    tweets?: TweetAPI[];
+    media?: TweetMedia[];
+  };
 }
 
 export interface TweetParsed extends Tweet {

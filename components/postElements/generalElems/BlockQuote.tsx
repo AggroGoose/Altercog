@@ -1,6 +1,6 @@
 import { createElement } from "react";
-import contentEval from "../../lib/contentEval";
-import { ParseElement } from "../../addl";
+import contentEval from "../../../lib/contentEval";
+import { ParseElement } from "../../../addl";
 
 export default function BlockQuote({ elem }: { elem: ParseElement }) {
   return (

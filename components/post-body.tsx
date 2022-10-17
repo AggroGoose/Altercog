@@ -24,7 +24,7 @@ export default function PostBody({
         <ShareButton />
       </div>
       <p className="article__summary">{post.excerpt}</p>
-      {content.map((elem) => genElements(elem))}
+      <>{content.map((elem) => genElements(elem))}</>
     </div>
   );
 }

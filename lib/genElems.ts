@@ -4,48 +4,38 @@ import {
   DetailedReactHTMLElement,
   FunctionComponent,
 } from "react";
-import { ElemAttribs, ParseElement } from "../addl";
+import { ParseElement } from "../addl";
 import childBuilder from "./childBuilder";
 
 import AudioCard from "../components/postElements/audio/audioCard";
-import BlockQuote from "../components/postElements/BlockQuote";
+import BlockQuote from "../components/postElements/generalElems/BlockQuote";
 import BookmarkCard from "../components/postElements/bookmark/bookmarkCard";
 import CalloutCard from "../components/postElements/callout/calloutCard";
-import EmbedCard from "../components/postElements/embedCard/embedCard";
 import FileCard from "../components/postElements/fileCard/fileCard";
 import GalleryCard from "../components/postElements/images/galleryCard";
-import HeaderCard from "../components/postElements/headerCard/headerCard";
+import Header from "../components/postElements/generalElems/Header";
+import SectionHeaderCard from "../components/postElements/sectionHeader/sectionHeaderCard";
 import ImageCard from "../components/postElements/images/imageCard";
 import ProductCard from "../components/postElements/productCard/productCard";
 import ToggleCard from "../components/postElements/toggleCard/toggleCard";
 import contentEval from "./contentEval";
+import PostButtonCard from "../components/postElements/generalElems/PostButtonCard";
+import TwitterCard from "../components/postElements/embedCard/twitterCard";
+import YoutubeCard from "../components/postElements/embedCard/youtubeCard";
+import OtherEmbed from "../components/postElements/embedCard/otherEmbed";
+import TikTokCard from "../components/postElements/embedCard/tikTokCard";
 
 export default function genElements(elem: ParseElement) {
   switch (elem.name) {
     case "h2":
-      const headContent = contentEval(elem);
-      const headObj: ElemAttribs = { key: elem.id };
-      if (elem.attributes?.id) {
-        headObj.id = elem.attributes.id;
-        headObj.className = "article__heading";
-      }
-      return createElement(elem.name, headObj, ...headContent);
+      return specComp(Header, elem);
     case "blockquote":
       if (!elem.attributes?.class || !elem.attributes?.id)
         return specComp(BlockQuote, elem);
     case "p":
     case "h3":
-      const textContent = elem.content
-        ? [elem.content]
-        : childBuilder(elem.children);
-      const textObj: ElemAttribs = { key: elem.id };
-      if (elem.attributes?.class) {
-        textObj.className = elem.attributes.class;
-      }
-      if (elem.attributes?.id) {
-        textObj.id = elem.attributes.id;
-      }
-      return createElement(elem.name, textObj, ...textContent);
+      const textContent = contentEval(elem);
+      return createElement(elem.name, { key: elem.id }, ...textContent);
     case "ul":
     case "ol":
       return createElement(
@@ -66,7 +56,22 @@ export default function genElements(elem: ParseElement) {
           case figCom.includes("kg-bookmark-card"):
             return specComp(BookmarkCard, elem);
           case figCom.includes("kg-embed-card"):
-            return specComp(EmbedCard, elem);
+            if (!elem.children) return;
+            const child1 = elem.children[0];
+            if (child1.name == "blockquote") {
+              if (child1.attributes.class == "tiktok-embed") {
+                return specComp(TikTokCard, elem);
+              } else if (child1.attributes.class == "twitter-tweet") {
+                return specComp(TwitterCard, elem);
+              }
+            }
+            if (child1.name == "iframe") {
+              if (child1.attributes?.src?.includes("youtube")) {
+                return specComp(YoutubeCard, elem);
+              } else {
+                return specComp(OtherEmbed, elem);
+              }
+            }
         }
       }
     case "div":
@@ -80,27 +85,16 @@ export default function genElements(elem: ParseElement) {
           case divCom.includes("kg-toggle-card"):
             return specComp(ToggleCard, elem);
           case divCom.includes("kg-file-card"):
-            return createElement(FileCard, { elem, key: elem.id });
+            return specComp(FileCard, elem);
           case divCom.includes("kg-button-card"):
-            return createElement(
-              "div",
-              { ...elem.attributes, key: elem.id },
-              ...childBuilder(elem.children)
-            );
+            return specComp(PostButtonCard, elem);
           case divCom.includes("kg-header-card"):
-            return specComp(HeaderCard, elem);
+            return specComp(SectionHeaderCard, elem);
           case divCom.includes("kg-product-card"):
             return specComp(ProductCard, elem);
           default:
-            const divTent = elem.content
-              ? [elem.content]
-              : elem.children
-              ? childBuilder(elem.children)
-              : [];
-            const divObjent = elem.attributes
-              ? { ...elem.attributes, key: elem.id }
-              : { key: elem.id };
-            return createElement("div", divObjent, ...divTent);
+            const divTent = contentEval(elem);
+            return createElement("div", { key: elem.id }, ...divTent);
         }
       }
   }

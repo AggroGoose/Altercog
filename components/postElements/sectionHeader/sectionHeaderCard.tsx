@@ -1,6 +1,6 @@
 import { ParseElement } from "../../../addl";
 
-export default function HeaderCard({ elem }: { elem: ParseElement }) {
+export default function SectionHeaderCard({ elem }: { elem: ParseElement }) {
   const headerSection = elem.children?.find((child) =>
     child.attributes?.class?.includes("card-header")
   );

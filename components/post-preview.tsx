@@ -33,14 +33,14 @@ export default function PostPreview({ post }: { post: PostOrPage }) {
         )}
       </div>
       <h3>
-        <Link href={`/articles/${tag}/${slug}`}>
+        <Link href={`/articles/${tag?.slug}/${slug}`}>
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
 
       <p className="mstories__preview--excerpt">{excerpt}</p>
       <div className="mstories__preview--meta">
-        <Date dateString={date} />{" "}
+        {date && <Date dateString={date} />}{" "}
         <span className="mstories__preview--duration">{`${duration} min read`}</span>
       </div>
     </div>

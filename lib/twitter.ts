@@ -1,4 +1,10 @@
-import { TweetAPI, TweetParsed, TweetUser } from "../addl";
+import {
+  MultiTweetResponse,
+  ParseElement,
+  TweetAPI,
+  TweetParsed,
+  TweetUser,
+} from "../addl";
 
 /*
  * Code modified from Lee Robinson's tweet embed video tutorial.
@@ -6,7 +12,7 @@ import { TweetAPI, TweetParsed, TweetUser } from "../addl";
 
 export const getSingleTweet = async (id: string | number) => {
   const queryParams = new URLSearchParams({
-    id: id.toString(),
+    ids: id.toString(),
     expansions:
       "author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id",
     "tweet.fields":
@@ -16,16 +22,24 @@ export const getSingleTweet = async (id: string | number) => {
       "duration_ms,height,media_key,preview_image_url,type,url,width,public_metrics",
   });
 
-  const response = await fetch(
+  const token = process.env.TWITTER_API_BEARER;
+
+  const response: void | MultiTweetResponse = await fetch(
     `https://api.twitter.com/2/tweets?${queryParams}`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.TWITTER_API_BEARER}`,
+        Authorization: `Bearer ${token}`,
       },
     }
-  );
+  )
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error("ERROR WILL ROBINSON", error);
+    });
 
-  const tweet: TweetAPI = await response.json();
+  if (!response) return;
+
+  const tweet: TweetAPI = { ...response.data[0], includes: response.includes };
 
   const getAuthorInfo: (autor_id: string) => TweetUser = (
     author_id: string
@@ -100,4 +114,32 @@ export const getSingleTweet = async (id: string | number) => {
   const returnObject: TweetParsed = parseTweet(tweet);
 
   return returnObject;
+};
+
+export const TwitterFinder = (arr: Array<ParseElement>) => {
+  const twitterArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].name == "figure") {
+      console.log("Figure found");
+      if (!arr[i].children) {
+        console.log("No children");
+        continue;
+      }
+      const childArr = arr[i].children?.find(
+        (child) => child.attributes.class == "twitter-tweet"
+      );
+      if (!childArr) continue;
+      console.log("Twitter found");
+      const tweetRef = childArr.children?.find((child) => child.name === "a");
+      if (tweetRef?.attributes.href) {
+        const tweetUrl = tweetRef.attributes.href;
+        const tweetEnd = tweetUrl.split("/").pop();
+        const tweetId = tweetEnd?.split("?").shift();
+        if (tweetId && arr[i].id) {
+          twitterArr.push({ id: arr[i].id, tweetId });
+        }
+      }
+    }
+  }
+  return twitterArr;
 };

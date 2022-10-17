@@ -9,10 +9,12 @@ import Head from "next/head";
 import parseHTML from "../../../lib/parseHTML";
 import AboutAuthor from "../../../components/postPage/aboutAuthor";
 import ArticleComments from "../../../components/postPage/items/articleComments";
+import axios from "axios";
 
 import { GetStaticProps, GetStaticPaths } from "next";
 import { ParseElement } from "../../../addl";
 import { PostOrPage } from "@tryghost/content-api";
+import { getSingleTweet, TwitterFinder } from "../../../lib/twitter";
 
 export default function Post({
   post,
@@ -105,14 +107,14 @@ export default function Post({
               post={post}
               setIsCommentOpen={setIsCommentOpen}
             />
-            {isCommentOpen && (
+            {isCommentOpen && post.comment_id && (
               <ArticleComments
                 commentId={post.comment_id}
                 isCommentOpen={isCommentOpen}
               />
             )}
           </article>
-          <AboutAuthor author={post.primary_author} />
+          {post.primary_author && <AboutAuthor author={post.primary_author} />}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
         </>
       )}
@@ -130,6 +132,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     parsedPost = [];
   }
 
+  const tweets = TwitterFinder(parsedPost);
+  if (tweets.length > 0) {
+    for (const tweet of tweets) {
+      const { id, tweetId } = tweet;
+      const tweetInfo = await getSingleTweet(tweetId);
+      if (tweetInfo) {
+        const index = parsedPost.findIndex((el) => el.id === id);
+        if (parsedPost[index]) {
+          parsedPost[index].additional = {
+            tweet: tweetInfo,
+          };
+        }
+      }
+    }
+  }
+
   return {
     props: {
       post,
@@ -143,7 +161,7 @@ export async function getStaticPaths() {
   const allPosts = (await getAllPostsWithSlug()) || [];
   return {
     paths: allPosts.map((post) => {
-      if (!post?.primary_tag || post?.slug) return;
+      if (!post?.primary_tag || !post?.slug) return;
       return `/articles/${post.primary_tag.slug}/${post.slug}`;
     }),
     fallback: true,
