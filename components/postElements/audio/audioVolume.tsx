@@ -5,8 +5,8 @@ export const AudioVolume = ({
   audioRef,
   audioContainer,
 }: {
-  audioRef: HTMLAudioElement;
-  audioContainer: HTMLDivElement;
+  audioRef: React.RefObject<HTMLAudioElement>;
+  audioContainer: React.RefObject<HTMLDivElement>;
 }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(100);
@@ -14,16 +14,21 @@ export const AudioVolume = ({
   const volumeBar = useRef<HTMLInputElement>(null);
 
   function toggleMute() {
-    audioRef.muted = !isMuted;
+    if (!audioRef.current) return;
+    audioRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
   }
 
   function volumeChangeHandler() {
+    if (!audioRef.current || !audioContainer.current) return;
     if (!volumeBar?.current) return;
     const newValue = +volumeBar.current.value;
     const parsedValue = newValue / 100;
-    audioRef.volume = parsedValue;
-    audioContainer.style.setProperty("--volume-before-width", `${newValue}%`);
+    audioRef.current.volume = parsedValue;
+    audioContainer.current.style.setProperty(
+      "--volume-before-width",
+      `${newValue}%`
+    );
     setVolumeLevel(newValue);
   }
 

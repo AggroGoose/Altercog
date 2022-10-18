@@ -9,8 +9,8 @@ export default function AudioControls({
   audioRef,
   audioContainer,
 }: {
-  audioRef: HTMLAudioElement;
-  audioContainer: HTMLDivElement;
+  audioRef: React.RefObject<HTMLAudioElement>;
+  audioContainer: React.RefObject<HTMLDivElement>;
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -28,7 +28,7 @@ export default function AudioControls({
   }
 
   useEffect(() => {
-    const seconds = audioRef.duration;
+    const seconds = audioRef.current?.duration || 0;
     setAudioDuration(seconds);
     if (!audioSeekBar?.current?.max) {
       return;
@@ -39,30 +39,32 @@ export default function AudioControls({
   function togglePlayPause() {
     if (isPlaying) {
       cancelAnimationFrame(animationRef.current);
-      audioRef.pause();
+      audioRef.current?.pause();
       setIsPlaying(false);
     } else {
       animationRef.current = requestAnimationFrame(whilePlaying);
-      audioRef.play();
+      audioRef.current?.play();
       setIsPlaying(true);
     }
   }
 
   function whilePlaying() {
     if (!audioSeekBar?.current) return;
-    audioSeekBar.current.value = audioRef.currentTime.toString();
+    audioSeekBar.current.value =
+      audioRef.current?.currentTime.toString() || "0";
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
   }
 
   function seekChangeHandler() {
-    if (!audioSeekBar?.current) return;
-    audioRef.currentTime = +audioSeekBar.current.value;
+    if (!audioSeekBar?.current || !audioRef.current) return;
+    audioRef.current.currentTime = +audioSeekBar.current.value;
     changePlayerCurrentTime();
   }
 
   function changePlayerCurrentTime() {
-    audioContainer.style.setProperty(
+    if (!audioContainer.current || !audioRef.current) return;
+    audioContainer.current.style.setProperty(
       "--seek-before-width",
       `${
         audioSeekBar?.current
@@ -70,10 +72,11 @@ export default function AudioControls({
           : 0
       }%`
     );
-    audioContainer.style.setProperty(
+    audioContainer.current.style.setProperty(
       "--buffered-width",
       `${
-        (audioRef.buffered.end(audioRef.buffered.length - 1) / audioDuration) *
+        (audioRef.current.buffered.end(audioRef.current.buffered.length - 1) /
+          audioDuration) *
         100
       }%`
     );

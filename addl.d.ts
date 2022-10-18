@@ -6,6 +6,7 @@ export interface ParseElement {
   children?: ParseElement[];
   additional?: {
     tweet?: TweetParsed;
+    audio?: { imgSrc: string; audioSrc: string; audioTitle: string };
   };
 }
 

@@ -24,6 +24,7 @@ import TwitterCard from "../components/postElements/embedCard/twitterCard";
 import YoutubeCard from "../components/postElements/embedCard/youtubeCard";
 import OtherEmbed from "../components/postElements/embedCard/otherEmbed";
 import TikTokCard from "../components/postElements/embedCard/tikTokCard";
+import findAudioDetails from "../components/postElements/audio/helpers/findAudioDetails";
 
 export default function genElements(elem: ParseElement) {
   switch (elem.name) {
@@ -79,6 +80,8 @@ export default function genElements(elem: ParseElement) {
         const divCom = elem.attributes.class;
         switch (true) {
           case divCom.includes("kg-audio-card"):
+            const audioElem = elem;
+            audioElem.additional = { audio: findAudioDetails(elem) };
             return specComp(AudioCard, elem);
           case divCom.includes("kg-callout-card"):
             return specComp(CalloutCard, elem);

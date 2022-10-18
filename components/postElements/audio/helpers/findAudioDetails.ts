@@ -1,8 +1,13 @@
 import { ParseElement } from "../../../../addl";
 
 export default function findAudioDetails(elem: ParseElement) {
-  if (!elem?.children) return null;
-  const imgSrc =
+  const audioObj = {
+    imgSrc: "",
+    audioSrc: "",
+    audioTitle: "",
+  };
+  if (!elem?.children) return audioObj;
+  audioObj.imgSrc =
     elem.children.find((child) => child.name == "img")?.attributes?.src || "";
 
   const audioContainer = elem.children.find(
@@ -12,17 +17,14 @@ export default function findAudioDetails(elem: ParseElement) {
   let audioSrc: string;
   let audioTitle: string;
 
-  if (!audioContainer) {
-    audioSrc = "";
-    audioTitle = "";
-  } else {
-    audioSrc =
-      audioContainer.children?.find((child) => child.name == "audio")
-        ?.attributes?.src || "";
-    audioTitle =
-      audioContainer.children?.find((child) => child.name == "figcaption")
-        ?.content || "";
-  }
-
-  return { imgSrc, audioSrc, audioTitle };
+  if (!audioContainer) return audioObj;
+  audioObj.audioSrc =
+    audioContainer.children?.find((child) => child.name == "audio")?.attributes
+      ?.src || "";
+  audioObj.audioTitle =
+    audioContainer.children?.find(
+      (child) => child.attributes.class == "kg-audio-title"
+    )?.content || "";
+  console.log(audioObj);
+  return audioObj;
 }
